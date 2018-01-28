@@ -1,0 +1,1 @@
+from app import db # import the database instance from app.py
