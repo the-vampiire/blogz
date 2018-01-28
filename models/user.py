@@ -10,9 +10,9 @@ class User(db.Model):
   password = db.Column(db.String(30), nullable = False)
   blogs = db.relationship("Blog", backref = "User", lazy = "joined")
 
-  def verify_email(email):
+  def verify_email(self, email):
     return validate_email(email)
 
-  def hash_password(password):
+  def hash_password(self, password):
     return pbkdf2_sha256(password)
     
