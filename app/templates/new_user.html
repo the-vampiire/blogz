@@ -1,0 +1,32 @@
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<form action='/new_user' method="POST">
+  <label>
+      Username:
+      <input type="text" name="username" {% if username %} value="{{ username }}" {% endif %} required>
+  </label>
+  {% if password_error %}<p>{{ password_error }}</p>{% endif %}
+  <label>
+      Password: 
+      <input type="password" name="password" required>
+  </label>
+  {% if verify_error %}<p>{{ verify_error }}</p>{% endif %}
+  <label>
+      Verify Password: 
+      <input type="password" name="verify_password" required>
+  </label>
+  {% if email_error %}<p>{{ email_error }}</p>{% endif %}
+  <label>
+      Email: 
+      <input type="text" name="email" {% if email %} value="{{ email }}" {% endif %}>
+  </label>
+  <input type="submit" name="Submit">
+</form>
