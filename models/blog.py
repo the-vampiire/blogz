@@ -1,11 +1,16 @@
-from app import db # import the database instance from app.py
+from app import DB, SESSION
+from models.user import User
+from datetime import datetime as dt
 
-class Blog(db.Model):
+class Blog(DB.Model):
   __tablename__ = "blogs" # override model name for plurality 
 
-  id = db.Column(db.Integer, primary_key = True)
-  title = db.Column(db.String(140), nullable = False)
-  body = db.Column(db.Text, nullable = False)
-  owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-  created_at = db.Column(db.String(25), nullable = False, default = dt.now().strftime('%B %d, %Y'))
-    
+  id = DB.Column(DB.Integer, primary_key = True)
+  title = DB.Column(DB.String(140), nullable = False)
+  body = DB.Column(DB.Text, nullable = False)
+  owner_id = DB.Column(DB.Integer, DB.ForeignKey('users.id'), nullable = False)
+  created_at = DB.Column(DB.String(25), nullable = False, default = dt.now().strftime('%B %d, %Y'))
+
+  def get_owners(self):
+    owner_ids = SESSION.query(self.owner_id.distinct()).all()
+    return [User.query.get(user_id) for user_id in owner_ids]
