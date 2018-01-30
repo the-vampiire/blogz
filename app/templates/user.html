@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %} {{ user.username }} {% endblock %}
+
+{% block body %}
+  <h1>{{ user.username }}'s Blogs</h1>
+  {% if user.blogs %}
+    <ul>
+      {% for blog in user.blogs %}
+        <li><a href="/blog/{{ blog.id }}">{{ blog.title }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <h2>No blogs have been added for this user</h2>
+  {% endif %}
+{% endblock %}

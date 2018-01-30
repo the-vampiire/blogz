@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, request, flash, url_for
+from flask import Blueprint, session, redirect, request, flash
 from app import db_session
 from app.models.blog import Blog
 
@@ -18,4 +18,4 @@ def create_blog():
     db_session.add(blog)
     db_session.commit()
 
-  return redirect('/')
+  return redirect('/blog/{}'.format(blog.id))

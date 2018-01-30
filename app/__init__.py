@@ -24,20 +24,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 db_session = db.session
 
-
 # Import Routes - THANK FUCK [https://stackoverflow.com/questions/41828711/flask-blueprint-sqlalchemy-cannot-import-name-db-into-moles-file]
-from app.routes.index import index
-from app.routes.signup import signup
+from app.routes.index import index_view
+from app.routes.signup import signup_view
 from app.routes.new_blog import new_blog
-from app.routes.login import login
+from app.routes.login import login_view
 from app.routes.logout import logout
-from app.routes.blog import blog
-app.register_blueprint(index)
-app.register_blueprint(signup)
+from app.routes.blog import blog_view
+from app.routes.user import user_view
+app.register_blueprint(index_view)
+app.register_blueprint(signup_view)
 app.register_blueprint(new_blog)
-app.register_blueprint(login)
+app.register_blueprint(login_view)
 app.register_blueprint(logout)
-app.register_blueprint(blog)
-
-
-# TODO: grab the session in the pre-route and setup a whitelist
+app.register_blueprint(blog_view)
+app.register_blueprint(user_view)

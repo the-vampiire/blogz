@@ -15,14 +15,14 @@
   {% endif %}
 
   {% if blogs %}
-  <h2>BLOGS</h2>
-    <ul>
-      {% for blog in blogs %}
-        <li>
-          <a href="/blog/{{ blog.id }}">{{ blog.title }}</a>
-        </li>
-      {% endfor %}
-    </ul>
+    <h2>BLOGS</h2>
+      <ul>
+        {% for blog in blogs %}
+          <li>
+            <a href="/blog/{{ blog.id }}">{{ blog.title }}</a>
+          </li>
+        {% endfor %}
+      </ul>
   {% else %}
     <p>No blog posts</p>
   {% endif %}

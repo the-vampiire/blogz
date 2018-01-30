@@ -3,10 +3,10 @@ from app import db_session
 from app.models.user import User
 from app.models.blog import Blog
  
-login = Blueprint('login', __name__)
+login_view = Blueprint('login_view', __name__)
 
-@login.route('/login', methods = ['GET', 'POST'])
-def login_page():
+@login_view.route('/login', methods = ['GET', 'POST'])
+def login():
   if request.method == 'GET':
     if 'logged_in' not in session: return render_template('login.html')
     return redirect('/')
@@ -20,7 +20,7 @@ def login_page():
     flash('No user found with that username. Signup for a new account')
     return redirect('/signup')
 
-  if not user.check_password(password):
+  if not user.verify_password(password):
     return render_template('login.html', auth_error="Invalid credentials")
 
   # create session
