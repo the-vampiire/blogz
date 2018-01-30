@@ -1,0 +1,44 @@
+<header>
+  {% block header %}
+  {% endblock %}
+  <link href="{{ url_for('static', filename='./styles/styles.css') }}" rel="stylesheet">
+  <title>{% block title %}{% endblock %}</title>
+</header>
+<body>
+  <nav>
+    <span id="navigation">
+      <a href='/'>HOME</a>
+      {% if user %}
+        <a href='/user/{{ user.id }}'>{{ user.username }}</a>
+      {% endif %}
+    </span>
+    <span id="authentication">
+      {% if user %}
+        <a href='/logout'>LOGOUT</a>
+      {% else %}
+        <a href='/login'>LOGIN</a>
+        <a href='/signup'>SIGN UP</a>
+      {% endif %}
+    </span>
+  </nav>
+
+  {% block body %}
+  {% endblock %}
+
+  <footer>
+    Coded by <a href="https://github.com/the-vampiire">Vampiire</a> || <a href="https://github.com/the-vampiire/blogz" >Source</a>
+    <div id="new_blog">
+      <form action='new_blog' method="POST">
+        <label>
+          Title: <input type="text" name="title" required>
+        </label>
+        <label>
+          Content:
+          <textarea type="text" name="body" required></textarea>
+        </label>
+        <input type="submit" name="Submit">
+      </form>
+    </div>
+  </footer>
+</body>
+

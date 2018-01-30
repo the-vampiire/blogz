@@ -1,22 +1,21 @@
-from flask import Blueprint, render_template, session, redirect, request
+from flask import Blueprint, render_template, session, redirect, request, flash, url_for
 from app import db_session
 from app.models.blog import Blog
 
 new_blog = Blueprint('new_blog', __name__)
 
-@new_blog.route('/new_blog', methods=['GET', 'POST'])
+@new_blog.route('/new_blog', methods=['POST'])
 def create_blog():
-  if request.method == 'GET':
-    return render_template('new_blog.html')
+  if 'logged_in' not in session:
+    flash("Not logged in", category='errors')
+    return redirect('/')
+  else:
+    title = request.form['title']
+    body = request.form['body']
+    owner_id = session['user_id']
 
-  title = request.form['title']
-  body = request.form['body']
-  owner_id = session['user_id']
+    blog = Blog(title=title, body=body, owner_id=owner_id)
+    db_session.add(blog)
+    db_session.commit()
 
-  blog = Blog(title=title, body=body, owner_id=owner_id)
-  db_session.add(blog)
-  db_session.commit()
-
-  blogs = Blog.query.all()
-  users = Blog.get_owners(Blog)
-  return render_template('index.html', users=users, blogs=blogs)
+  return redirect('/')

@@ -27,8 +27,12 @@ db_session = db.session
 
 # Import Routes - THANK FUCK [https://stackoverflow.com/questions/41828711/flask-blueprint-sqlalchemy-cannot-import-name-db-into-moles-file]
 from app.routes.index import index
-from app.routes.new_user import new_user
+from app.routes.signup import signup
 from app.routes.new_blog import new_blog
+from app.routes.login import login
+from app.routes.logout import logout
 app.register_blueprint(index)
-app.register_blueprint(new_user)
+app.register_blueprint(signup)
 app.register_blueprint(new_blog)
+app.register_blueprint(login)
+app.register_blueprint(logout)

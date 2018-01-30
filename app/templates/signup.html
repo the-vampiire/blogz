@@ -8,7 +8,7 @@
   {% endif %}
 {% endwith %}
 
-<form action='/new_user' method="POST">
+<form action='/signup' method="POST">
   <label>
       Username:
       <input type="text" name="username" {% if username %} value="{{ username }}" {% endif %} required>
@@ -28,5 +28,5 @@
       Email: 
       <input type="text" name="email" {% if email %} value="{{ email }}" {% endif %}>
   </label>
-  <input type="submit" name="Submit">
+  <input type="submit" name="Sign Up">
 </form>
