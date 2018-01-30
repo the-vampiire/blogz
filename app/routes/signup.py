@@ -3,11 +3,12 @@ from app import db_session
 from app.models.user import User
 from app.models.blog import Blog
 
-signup = Blueprint('signup', __name__) 
+signup_view = Blueprint('signup_view', __name__) 
 
-@signup.route('/signup', methods = ['GET', 'POST'])
-def signup_page():
-  if session and session['logged_in']: return redirect('/')
+@signup_view.route('/signup', methods = ['GET', 'POST'])
+def signup():
+  if session and session['logged_in']:
+    return redirect('/')
 
   if request.method == 'GET':
     return render_template("signup.html")
@@ -17,7 +18,7 @@ def signup_page():
   verify_password = request.form['verify_password']
   email = request.form['email'] or None
 
-# Validation
+# Route-level validation
   password_error = User.password_error(User, raw_password) or None
   verify_password_error = 'Passwords do not match' if raw_password != verify_password else None 
   email_error = 'Invalid email address' if email and not User.verify_email(User, email) else None
@@ -30,12 +31,10 @@ def signup_page():
   if verify_password_error or password_error or email_error:
     return render_template('signup.html', username=username, email=email)
 
-# All clear - create user 
-  password = User.hash_password(User, raw_password)
-  
+# All clear - create user
+ 
   #create and store user
-  user = User(username=username, password=password, email=email)
-
+  user = User(username=username, raw_password=raw_password, email=email)
   db_session.add(user)
   db_session.commit()
 
@@ -44,7 +43,7 @@ def signup_page():
   session['username'] = user.username
   session['user_id'] = user.id
   
-  return redirect('/')
+  return redirect('/user/{}'.format(user.id))
   
 
   

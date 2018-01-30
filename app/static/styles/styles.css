@@ -12,15 +12,20 @@ nav {
   float: right
 }
 
+#new_blog {
+  position: absolute;
+  float: right;
+}
+
 #new_blog_title {
-  display: block;
+  display: inline;
   position: relative;
   padding: 20px 0px;
 }
 
 #new_blog_body {
-  display: block;
-  position: absolute;
+  display: inline;
+  position: relative;
   padding: 20px 0px;
 }
 
