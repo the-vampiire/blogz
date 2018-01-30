@@ -11,6 +11,9 @@ class Blog(db.Model):
   owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
   created_at = db.Column(db.String(25), nullable = False, default = dt.now().strftime('%B %d, %Y'))
 
+  def get_owner(self):
+    return User.query.get(self.owner_id)
+
   def get_owners(self):
     owner_ids = db_session.query(self.owner_id.distinct()).all()
     return [User.query.get(user_id) for user_id in owner_ids]

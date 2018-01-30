@@ -1,3 +1,7 @@
+nav {
+  padding-bottom: 20px;
+}
+
 #navigation {
   position: relative;
   float: left
@@ -8,17 +12,22 @@
   float: right
 }
 
-#new_blog {
-  background-color: black;
+#new_blog_title {
+  display: block;
   position: relative;
-  float: right;
+  padding: 20px 0px;
+}
+
+#new_blog_body {
+  display: block;
+  position: absolute;
+  padding: 20px 0px;
 }
 
 footer {
-  z-index: 10;
-  color: white;
+  color: black;
   position: fixed;
   width: 100%;
-  background-color: black;
+  background-color:white;
 }
 
