@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block body %}
+  {% if owner %}<h1> {{ owner.username }} {% else %} Username failed to load {% endif %}</h1>
+  {% if blog %}
+    <article class='blog'>
+      <h2>{{ blog.title }} - {{ blog.created_at }}</h2>
+      <p>{{ blog.body }}</p>
+    </article>
+  {% else %}
+    Blog failed to load 
+  {% endif %}
+{% endblock %}
+
