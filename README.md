@@ -1,8 +1,38 @@
 # LaunchCode LC-101 Blogz Project
 Teaching Fellow help for students working on LC-101 Unit 2 final assigment Blogz
 
-## Expanded Goal
+# Goal
 - modularize the application by splitting the MVC pieces into separate modules
+- [more information](https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications)
+
+# How to use
+### Clone the repo
+- `git clone https://github.com/the-vampiire/blogz`
+
+### Create and activate the virtual environment using the `env.yml` file
+- `conda env create -n blogz -f env.yml`
+- `source activate blogz`
+- [more information](https://conda.io/docs/commands.html#conda-environment-commands)
+
+### Startup the MySQL sever
+- use MAMP or if you have `mysql` installed use `mysqld`
+- make sure you have a login and password
+- create a database called `blogz`
+
+### Create the `config.py` file
+- create the file **outside** of the `app/` directory
+- add the following variables
+- the port will typically default to `3306` or `8889` depending on the database server you use
+```
+DB_URI = 'mysql+pymysql://USERNAME:PASSWORD@localhost:PORT/blogz'
+
+SESSION_SECRET = 'SECRET GOES HERE'
+```
+
+### Start the server
+- start using `python run.py`
+
+<hr>
 
 ## Original Project Requirements
 - Log in (or register for a new account). The main page should display a list of users. Clicking on a user should redirect to a page displaying all blog posts written by them.
