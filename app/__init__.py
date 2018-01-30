@@ -2,7 +2,7 @@
 from flask import Flask, request, render_template, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_bcrypt import Bcrypt
-from app.config import DB_URI, SESSION_SECRET
+from config import DB_URI, SESSION_SECRET
 
 # Create Server
 app = Flask(__name__)
